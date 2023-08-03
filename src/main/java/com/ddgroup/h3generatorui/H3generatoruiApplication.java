@@ -9,5 +9,4 @@ public class H3generatoruiApplication {
     public static void main(String[] args) {
         SpringApplication.run(H3generatoruiApplication.class, args);
     }
-
 }

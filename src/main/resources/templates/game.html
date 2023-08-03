@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Heroes 3 Battle Simulator</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+    <h1>Heroes 3 Battle Simulator</h1>
+</header>
+
+<section>
+    <h2>Generated Matches</h2>
+    <button id="generateMatchesBtn">Generate Matches</button>
+    <table id="matches-table">
+    </table>
+</section>
+
+<section>
+    <h2>Re-roll Champion</h2>
+    <button id="reRollChampionBtn">Re-roll Champion</button>
+</section>
+
+<section>
+    <h2>Re-roll Champions</h2>
+    <button id="reRollChampionsBtn">Re-roll Champions</button>
+</section>
+
+<section>
+    <h2>Hero Details</h2>
+    <select id="hero-select">
+    </select>
+    <button id="getHeroDetailsBtn">Get Details</button>
+    <div id="hero-details">
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2023 D&D Co. All rights reserved.</p>
+</footer>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $('#generateMatchesButton').click(function() {
+            $.ajax({
+                url: '/api/game/matches',
+                type: 'get',
+                success: function(data) {
+                    // TODO
+
+                },
+                error: function() {
+                    alert('Error while request...');
+                }
+            });
+        });
+
+        $('#rerollChampionButton').click(function() {
+            var bannedHeroName = $('#bannedHero').val();
+
+            $.ajax({
+                url: '/api/game/reroll-champion',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(bannedHeroName),
+                success: function(data) {
+                    // TODO
+                },
+                error: function() {
+                    alert('Error while request...');
+                }
+            });
+        });
+
+        $('#rerollChampionsButton').click(function() {
+            var michalBannedChampionName = $('#michalBannedHero').val();
+            var danielBannedChampionName = $('#danielBannedHero').val();
+
+            $.ajax({
+                url: '/api/game/reroll-champions',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({ "michalHero": michalBannedChampionName, "danielHero": danielBannedChampionName }),
+                success: function(data) {
+                    // TODO
+                },
+                error: function() {
+                    alert('Error while request...');
+                }
+            });
+        });
+
+        $('#getHeroDetailsButton').click(function() {
+            var heroName = $('#hero').val();
+
+            $.ajax({
+                url: '/api/game/hero-details/' + heroName,
+                type: 'get',
+                success: function(data) {
+                    // TODO
+                },
+                error: function() {
+                    alert('Error while request...');
+                }
+            });
+        });
+    });
+</script>
+</html>
