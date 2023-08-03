@@ -36,7 +36,7 @@ public class GameController {
         return gameService.reRollChampions(heroes.michalHero(), heroes.michalHero());
     }
 
-    @GetMapping("/hero-details/{id}")
+    @GetMapping("/hero-details/{hero}")
     public HeroDetails getHeroDetails(@PathVariable Hero hero) {
         return gameService.getHeroDetails(hero);
     }
