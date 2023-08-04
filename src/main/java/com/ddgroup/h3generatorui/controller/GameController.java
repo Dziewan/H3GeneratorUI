@@ -5,6 +5,7 @@ import model.HeroDetails;
 import model.HeroPair;
 import model.Match;
 import model.enumeration.Hero;
+import model.enumeration.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +45,10 @@ public class GameController {
     @GetMapping("/heroes")
     public List<Hero> getHeroes() {
         return gameService.getHeroes();
+    }
+
+    @GetMapping("/skills")
+    public List<Skill> getSkills() {
+        return gameService.getSkills();
     }
 }

@@ -4,6 +4,7 @@ import model.HeroDetails;
 import model.HeroPair;
 import model.Match;
 import model.enumeration.Hero;
+import model.enumeration.Skill;
 import org.springframework.stereotype.Service;
 import service.HeroesService;
 
@@ -36,5 +37,9 @@ public class GameService {
 
     public List<Hero> getHeroes() {
         return heroesService.getHeroes();
+    }
+
+    public List<Skill> getSkills() {
+        return heroesService.getSkills();
     }
 }
