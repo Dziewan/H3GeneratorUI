@@ -56,3 +56,57 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.hero-detail {
+    color: blue;
+}
+.spec-detail {
+    color: red;
+}
+.primary-skill-detail {
+    color: green;
+}
+.primary-skill-level-detail {
+    color: purple;
+}
+.secondary-skill-detail {
+    color: orange;
+}
+.secondary-skill-level-detail {
+    color: brown;
+}
+
+.hero-details-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-details-card p {
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+}
+
+.level {
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.level.basic {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+.level.advanced {
+    background-color: #ffc107;
+    color: #000000;
+}
+
+.level.expert {
+    background-color: #28a745;
+    color: #ffffff;
+}
+

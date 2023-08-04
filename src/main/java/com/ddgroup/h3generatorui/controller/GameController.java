@@ -40,4 +40,9 @@ public class GameController {
     public HeroDetails getHeroDetails(@PathVariable Hero hero) {
         return gameService.getHeroDetails(hero);
     }
+
+    @GetMapping("/heroes")
+    public List<Hero> getHeroes() {
+        return gameService.getHeroes();
+    }
 }

@@ -33,102 +33,10 @@
 <section>
     <h2>Hero Details</h2>
     <select id="hero-select">
-        <option value="ORIN">ORIN</option>
-        <option value="VALESKA">VALESKA</option>
-        <option value="EDRIC">EDRIC</option>
-        <option value="SYLVIA">SYLVIA</option>
-        <option value="SORSHA">SORSHA</option>
-        <option value="TYRIS">TYRIS</option>
-        <option value="LYONIS">LYONIS</option>
-        <option value="MEPHALA">MEPHALA</option>
-        <option value="JENOVA">JENOVA</option>
-        <option value="GISELLE">GISELLE</option>
-        <option value="IVOR">IVOR</option>
-        <option value="CLANCY">CLANCY</option>
-        <option value="KYRRE">KYRRE</option>
-        <option value="ELLESHAR">ELLESHAR</option>
-        <option value="AERIS">AERIS</option>
-        <option value="PIQUE">PIQUE</option>
-        <option value="JOSEPHINE">JOSEPHINE</option>
-        <option value="NEELA">NEELA</option>
-        <option value="FAFNER">FAFNER</option>
-        <option value="RISSA">RISSA</option>
-        <option value="IONA">IONA</option>
-        <option value="SOLMYR">SOLMYR</option>
-        <option value="FIONA">FIONA</option>
-        <option value="MARIUS">MARIUS</option>
-        <option value="IGNATIUS">IGNATIUS</option>
-        <option value="CALH">CALH</option>
-        <option value="PYRE">PYRE</option>
-        <option value="NYMUS">NYMUS</option>
-        <option value="AYDEN">AYDEN</option>
-        <option value="ZYDAR">ZYDAR</option>
-        <option value="STRAKER">STRAKER</option>
-        <option value="RANLOO">RANLOO</option>
-        <option value="VOKIAL">VOKIAL</option>
-        <option value="MOANDOR">MOANDOR</option>
-        <option value="CHARNA">CHARNA</option>
-        <option value="TAMIKA">TAMIKA</option>
-        <option value="ISRA">ISRA</option>
-        <option value="VIDOMINA">VIDOMINA</option>
-        <option value="CLAVIUS">CLAVIUS</option>
-        <option value="SANDRO">SANDRO</option>
-        <option value="THANT">THANT</option>
-        <option value="NAGASH">NAGASH</option>
-        <option value="LORELEI">LORELEI</option>
-        <option value="ARLACH">ARLACH</option>
-        <option value="DACE">DACE</option>
-        <option value="AJIT">AJIT</option>
-        <option value="GUNNAR">GUNNAR</option>
-        <option value="SHAKTI">SHAKTI</option>
-        <option value="ALAMAR">ALAMAR</option>
-        <option value="JAEGAR">JAEGAR</option>
-        <option value="MALEKITH">MALEKITH</option>
-        <option value="JEDDITE">JEDDITE</option>
-        <option value="DEEMER">DEEMER</option>
-        <option value="YOG">YOG</option>
-        <option value="GURNISSON">GURNISSON</option>
-        <option value="JABARKAS">JABARKAS</option>
-        <option value="SHIVA">SHIVA</option>
-        <option value="GRETCHIN">GRETCHIN</option>
-        <option value="KRELLION">KRELLION</option>
-        <option value="CRAG_HACK">CRAG_HACK</option>
-        <option value="TYRAXOR">TYRAXOR</option>
-        <option value="DESSA">DESSA</option>
-        <option value="GUNDULLA">GUNDULLA</option>
-        <option value="BRON">BRON</option>
-        <option value="DRAKON">DRAKON</option>
-        <option value="WYSTAN">WYSTAN</option>
-        <option value="TAZAR">TAZAR</option>
-        <option value="ALKIN">ALKIN</option>
-        <option value="KORBAC">KORBAC</option>
-        <option value="GERWULF">GERWULF</option>
-        <option value="BROGHILD">BROGHILD</option>
-        <option value="ROSIC">ROSIC</option>
-        <option value="VOY">VOY</option>
-        <option value="PASIS">PASIS</option>
-        <option value="THUNAR">THUNAR</option>
-        <option value="IGNISSA">IGNISSA</option>
-        <option value="LACUS">LACUS</option>
-        <option value="MONERE">MONERE</option>
-        <option value="ERDAMON">ERDAMON</option>
-        <option value="FIUR">FIUR</option>
-        <option value="KALT">KALT</option>
-        <option value="LUNA">LUNA</option>
-        <option value="BRISSA">BRISSA</option>
-        <option value="CORKES">CORKES</option>
-        <option value="JEREMY">JEREMY</option>
-        <option value="ILLOR">ILLOR</option>
-        <option value="ELMORE">ELMORE</option>
-        <option value="ANABEL">ANABEL</option>
-        <option value="CASSIO">CASSIO</option>
-        <option value="MIRIAM">MIRIAM</option>
-        <option value="EOVACIUS">EOVACIUS</option>
-        <option value="SPINT">SPINT</option>
     </select>
 
     <button id="getHeroDetailsButton">Get Details</button>
-    <div id="hero-details">
+    <div id="hero-details" class="hero-details-card">>
     </div>
 </section>
 
@@ -141,6 +49,14 @@
 
 <script>
     $(document).ready(function () {
+        $.get("/api/game/heroes", function(data) {
+            const select = $("#hero-select");
+
+            for (const hero of data) {
+                select.append(new Option(hero, hero));
+            }
+        });
+
         const heroDetailsDiv = $("#hero-details");
 
         $("#rerollChampionButton").click(function () {
@@ -174,19 +90,15 @@
             });
         });
 
-        $(document).ready(function () {
-            const heroDetailsDiv = $("#hero-details");
+        $("#getHeroDetailsButton").click(function () {
+            const selectedHero = $("#hero-select").val();
 
-            $("#getHeroDetailsButton").click(function () {
-                const selectedHero = $("#hero-select").val();
-
-                $.get(`/api/game/hero-details/${selectedHero}`, function (data) {
-                    heroDetailsDiv.empty();
-                    heroDetailsDiv.append(`<p>Hero: ${data.hero}</p>`);
-                    heroDetailsDiv.append(`<p>Spec: ${data.spec}</p>`);
-                    heroDetailsDiv.append(`<p>Primary Skill: ${data.primarySkillSet.skill} - Level: ${data.primarySkillSet.level}</p>`);
-                    heroDetailsDiv.append(`<p>Secondary Skill: ${data.secondarySkillSet.skill} - Level: ${data.secondarySkillSet.level}</p>`);
-                });
+            $.get(`/api/game/hero-details/${selectedHero}`, function (data) {
+                heroDetailsDiv.empty();
+                heroDetailsDiv.append(`<p class="hero-detail">Hero: ${data.hero}</p>`);
+                heroDetailsDiv.append(`<p class="spec-detail">Spec: ${data.spec}</p>`);
+                heroDetailsDiv.append(`<p class="primary-skill-detail">Primary Skill: ${data.primarySkillSet.skill} - <span class="level ${data.primarySkillSet.level.toLowerCase()}">Level: ${data.primarySkillSet.level}</span></p>`);
+                heroDetailsDiv.append(`<p class="secondary-skill-detail">Secondary Skill: ${data.secondarySkillSet.skill} - <span class="level ${data.secondarySkillSet.level.toLowerCase()}">Level: ${data.secondarySkillSet.level}</span></p>`);
             });
         });
     });

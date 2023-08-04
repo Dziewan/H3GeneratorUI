@@ -33,4 +33,8 @@ public class GameService {
     public HeroDetails getHeroDetails(Hero hero) {
         return heroesService.getHeroDetails(hero);
     }
+
+    public List<Hero> getHeroes() {
+        return heroesService.getHeroes();
+    }
 }
