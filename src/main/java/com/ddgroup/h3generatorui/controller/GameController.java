@@ -34,7 +34,7 @@ public class GameController {
 
     @PostMapping("/reroll-champions")
     public HeroPair reRollChampions(@RequestBody HeroPair heroes) {
-        return gameService.reRollChampions(heroes.michalHero(), heroes.michalHero());
+        return gameService.reRollChampions(heroes.michalHero(), heroes.danielHero());
     }
 
     @GetMapping("/hero-details/{hero}")

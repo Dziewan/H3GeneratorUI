@@ -10,24 +10,48 @@
 </header>
 
 <section>
-    <h2>Generated Matches</h2>
-    <button id="generateMatchesButton" onclick="window.location.href='/matches'">Generate Matches</button>
+    <h2>Generate Matches</h2>
+    <button id="generateMatchesButton">Generate Matches</button>
     <table id="matches-table">
+        <thead>
+        <tr>
+            <th>Match Number</th>
+            <th>Player</th>
+            <th>Details</th>
+            <th>Player</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 </section>
 
+
+
 <section>
     <h2>Re-roll Champion</h2>
-    <input id="banned-hero" type="text" placeholder="banned hero">
+    <select id="banned-hero-select">
+    </select>
     <button id="rerollChampionButton">Re-roll Champion</button>
+    <div id="reroll-champion-details" class="hero-details-card"></div>
 </section>
+
 
 <section>
     <h2>Re-roll Champions</h2>
-    <input id="michal-banned-hero" type="text" placeholder="Michal's banned hero">
-    <input id="daniel-banned-hero" type="text" placeholder="Daniel's banned hero">
+    <label for="michal-banned-hero">First Player Banned Hero</label>
+    <select id="michal-banned-hero">
+    </select>
+    <label for="daniel-banned-hero">Second Player Banned Hero</label>
+    <select id="daniel-banned-hero">
+    </select>
     <button id="rerollChampionsButton">Re-roll Champions</button>
+    <div id="michal-hero-details" class="hero-details-card"></div>
+    <div id="daniel-hero-details" class="hero-details-card"></div>
 </section>
+
+
 
 
 <section>
@@ -36,8 +60,7 @@
     </select>
 
     <button id="getHeroDetailsButton">Get Details</button>
-    <div id="hero-details" class="hero-details-card">>
-    </div>
+    <div id="hero-details" class="hero-details-card"></div>
 </section>
 
 <footer>
@@ -50,45 +73,98 @@
 <script>
     $(document).ready(function () {
         $.get("/api/game/heroes", function(data) {
-            const select = $("#hero-select");
+            const heroSelect = $("#hero-select");
+            const bannedHeroSelect = $("#banned-hero-select");
 
             for (const hero of data) {
-                select.append(new Option(hero, hero));
+                heroSelect.append(new Option(hero, hero));
+                bannedHeroSelect.append(new Option(hero, hero));
+            }
+
+            const michalBannedHeroSelect = $("#michal-banned-hero");
+            const danielBannedHeroSelect = $("#daniel-banned-hero");
+
+            for (const hero of data) {
+                michalBannedHeroSelect.append(new Option(hero, hero));
+                danielBannedHeroSelect.append(new Option(hero, hero));
             }
         });
 
         const heroDetailsDiv = $("#hero-details");
+        const rerollChampionDetailsDiv = $("#reroll-champion-details");
+
+        const matchesTable = $("#matches-table");
+
+        $("#generateMatchesButton").click(function () {
+            $.get("/api/game/matches", function (data) {
+                const matchesTableBody = $("#matches-table tbody");
+                matchesTableBody.empty();
+
+                for (const [index, match] of data.entries()) {
+                    const michalDetails = `Fraction: ${match.firstPlayer.army.fraction}, Hero: ${match.firstPlayer.army.hero}, Color: ${match.firstPlayer.color}, Reset Order: ${match.firstPlayer.resetOrder}`;
+                    const danielDetails = `Fraction: ${match.secondPlayer.army.fraction}, Hero: ${match.secondPlayer.army.hero}, Color: ${match.secondPlayer.color}, Reset Order: ${match.secondPlayer.resetOrder}`;
+
+                    const row = `<tr>
+                <td>Match ${index + 1}</td>
+                <td>${match.firstPlayer.name}</td>
+                <td>${michalDetails}</td>
+                <td>${match.secondPlayer.name}</td>
+                <td>${danielDetails}</td>
+            </tr>`;
+
+                    matchesTableBody.append(row);
+                }
+            });
+        });
 
         $("#rerollChampionButton").click(function () {
-            var bannedHero = $("#banned-hero").val();
-            $.post("/api/game/reroll-champion", { bannedHero }, function (data) {
-                heroDetailsDiv.html(
-                    `<p>Hero: ${data.hero}</p>
-                <p>Spec: ${data.spec}</p>
-                <p>Primary Skill: ${data.primarySkillset.skill}</p>
-                <p>Secondary Skill: ${data.secondarySkillSet.skill}</p>`
-                );
+            var bannedHero = $("#banned-hero-select").val();
+
+            $.ajax({
+                url: '/api/game/reroll-champion',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(bannedHero),
+                success: function (data) {
+                    rerollChampionDetailsDiv.empty();
+                    rerollChampionDetailsDiv.append(`<p class="hero-detail">Hero: ${data}</p>`);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
             });
         });
 
         $("#rerollChampionsButton").click(function () {
             var michalBannedHero = $("#michal-banned-hero").val();
             var danielBannedHero = $("#daniel-banned-hero").val();
-            $.post("/api/game/reroll-champions", { michalBannedHero, danielBannedHero }, function (data) {
-                heroDetailsDiv.html(
-                    `<h3>Michal's Hero</h3>
-                <p>Hero: ${data.michalHero.hero}</p>
-                <p>Spec: ${data.michalHero.spec}</p>
-                <p>Primary Skill: ${data.michalHero.primarySkillset.skill}</p>
-                <p>Secondary Skill: ${data.michalHero.secondarySkillSet.skill}</p>
-                <h3>Daniel's Hero</h3>
-                <p>Hero: ${data.danielHero.hero}</p>
-                <p>Spec: ${data.danielHero.spec}</p>
-                <p>Primary Skill: ${data.danielHero.primarySkillset.skill}</p>
-                <p>Secondary Skill: ${data.danielHero.secondarySkillSet.skill}</p>`
-                );
+
+            var heroPair = {
+                michalHero: michalBannedHero,
+                danielHero: danielBannedHero
+            };
+
+            $.ajax({
+                url: '/api/game/reroll-champions',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(heroPair),
+                success: function (data) {
+                    var michalHeroDiv = $("#michal-hero-details");
+                    var danielHeroDiv = $("#daniel-hero-details");
+
+                    michalHeroDiv.empty();
+                    danielHeroDiv.empty();
+
+                    michalHeroDiv.append(`<p class="hero-detail">For first player - > Hero: ${data.michalHero}</p>`);
+                    danielHeroDiv.append(`<p class="primary-skill-level-detail">For second player - > Hero: ${data.danielHero}</p>`);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
             });
         });
+
 
         $("#getHeroDetailsButton").click(function () {
             const selectedHero = $("#hero-select").val();

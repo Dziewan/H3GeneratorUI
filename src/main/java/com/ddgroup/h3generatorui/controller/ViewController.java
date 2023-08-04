@@ -25,10 +25,5 @@ public class ViewController {
         model.addAttribute("heroes", heroes);
         return "game";
     }
-
-    @GetMapping("/matches")
-    public String getMatchesPage() {
-        return "matches";
-    }
 }
 
