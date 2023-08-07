@@ -136,3 +136,14 @@ input[name="tabs"]:checked + .tab-label {
     display: block;
 }
 
+.red-color {
+    background-color: red;
+    color: white;
+}
+
+.blue-color {
+    background-color: blue;
+    color: white;
+}
+
+

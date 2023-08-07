@@ -132,20 +132,20 @@
                 matchesTableBody.empty();
 
                 for (const [index, match] of data.entries()) {
-                    const michalDetails = `Fraction: ${match.firstPlayer.army.fraction}, Hero: ${match.firstPlayer.army.hero}, Color: ${match.firstPlayer.color}, Reset Order: ${match.firstPlayer.resetOrder}`;
-                    const danielDetails = `Fraction: ${match.secondPlayer.army.fraction}, Hero: ${match.secondPlayer.army.hero}, Color: ${match.secondPlayer.color}, Reset Order: ${match.secondPlayer.resetOrder}`;
+                    const michalColorImage = `<img src="/flags/${match.firstPlayer.color}.png" alt="${match.firstPlayer.color} flag" class="flag-icon">`;
+                    const danielColorImage = `<img src="/flags/${match.secondPlayer.color}.png" alt="${match.secondPlayer.color} flag" class="flag-icon">`;
 
                     const row = ` <tr>
                     <td>Match ${index + 1}</td>
                     <td>${match.firstPlayer.name}</td>
                     <td><img src="/fraction/${match.firstPlayer.army.fraction}.png" alt="${match.firstPlayer.army.fraction}" style="width: 32px; height: 32px;"></td>
                     <td>${match.firstPlayer.army.hero}</td>
-                    <td>${match.firstPlayer.color}</td>
+                    <td>${michalColorImage}</td>
                     <td>${match.firstPlayer.resetOrder}</td>
                     <td>${match.secondPlayer.name}</td>
                     <td><img src="/fraction/${match.secondPlayer.army.fraction}.png" alt="${match.secondPlayer.army.fraction}" style="width: 32px; height: 32px;"></td>
                     <td>${match.secondPlayer.army.hero}</td>
-                    <td>${match.secondPlayer.color}</td>
+                    <td>${danielColorImage}</td>
                     <td>${match.secondPlayer.resetOrder}</td>
                 </tr>`;
 
