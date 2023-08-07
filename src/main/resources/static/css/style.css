@@ -1,14 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
 }
 
-header {
+header, footer {
     background-color: #333;
     color: #f0f0f0;
     padding: 10px 0;
     text-align: center;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.9;
 }
 
 h1, h2 {
@@ -46,67 +60,79 @@ button {
     font-size: 16px;
 }
 
-footer {
-    background-color: #333;
-    color: #f0f0f0;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-.hero-detail {
-    color: blue;
-}
-.spec-detail {
-    color: red;
-}
-.primary-skill-detail {
-    color: green;
-}
-.primary-skill-level-detail {
-    color: purple;
-}
-.secondary-skill-detail {
-    color: orange;
-}
-.secondary-skill-level-detail {
-    color: brown;
+.details-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row-reverse;
 }
 
 .hero-details-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    align-self: flex-start;
 }
 
 .hero-details-card p {
-    margin: 0 0 10px 0;
-    line-height: 1.6;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    position: relative;
 }
 
-.level {
-    padding: 2px 5px;
-    border-radius: 3px;
+.champion-display-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.level.basic {
-    background-color: #6c757d;
-    color: #ffffff;
+.hero-details-card {
+    flex: 1;
+    text-align: center;
 }
 
-.level.advanced {
-    background-color: #ffc107;
-    color: #000000;
+#michal-hero-image, #daniel-hero-image {
+    max-width: 100%;
+    height: auto;
 }
 
-.level.expert {
-    background-color: #28a745;
-    color: #ffffff;
+.vs-container {
+    margin: 0 20px;
+}
+
+input[name="tabs"] {
+    display: none;
+}
+
+.tab-label {
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s;
+}
+
+.tab-label:hover {
+    background-color: #45a049;
+}
+
+input[name="tabs"]:checked + .tab-label {
+    background-color: #388E3C;
+    border-bottom: 2px solid #2E7D32;
+}
+
+.tab-content {
+    text-align: center;
+    display: none;
+    padding-top: 20px;
+}
+
+#tab1:checked ~ .tab-content[data-tab="1"],
+#tab2:checked ~ .tab-content[data-tab="2"],
+#tab3:checked ~ .tab-content[data-tab="3"],
+#tab4:checked ~ .tab-content[data-tab="4"] {
+    display: block;
 }
 
