@@ -35,11 +35,18 @@
             <tr>
                 <th>Match Number</th>
                 <th>Player</th>
-                <th>Details</th>
+                <th>Fraction</th>
+                <th>Hero</th>
+                <th>Color</th>
+                <th>Reset Order</th>
                 <th>Player</th>
-                <th>Details</th>
+                <th>Fraction</th>
+                <th>Hero</th>
+                <th>Color</th>
+                <th>Reset Order</th>
             </tr>
             </thead>
+
             <tbody></tbody>
         </table>
     </section>
@@ -49,6 +56,7 @@
     <section>
         <h2>Re-roll Champion</h2>
         <select id="banned-hero-select"></select>
+        <p> </p>
         <button id="rerollChampionButton">Re-roll Champion</button>
         <div id="reroll-champion-details" class="hero-details-card"></div>
     </section>
@@ -86,6 +94,7 @@
     <section>
         <h2>Hero Details</h2>
         <select id="hero-select"></select>
+        <p> </p>
         <button id="getHeroDetailsButton">Get Details</button>
         <div id="hero-details-container" class="details-container">
             <div id="hero-details" class="hero-details-card"></div>
@@ -126,13 +135,19 @@
                     const michalDetails = `Fraction: ${match.firstPlayer.army.fraction}, Hero: ${match.firstPlayer.army.hero}, Color: ${match.firstPlayer.color}, Reset Order: ${match.firstPlayer.resetOrder}`;
                     const danielDetails = `Fraction: ${match.secondPlayer.army.fraction}, Hero: ${match.secondPlayer.army.hero}, Color: ${match.secondPlayer.color}, Reset Order: ${match.secondPlayer.resetOrder}`;
 
-                    const row = `<tr>
-                <td>Match ${index + 1}</td>
-                <td>${match.firstPlayer.name}</td>
-                <td>${michalDetails}</td>
-                <td>${match.secondPlayer.name}</td>
-                <td>${danielDetails}</td>
-            </tr>`;
+                    const row = ` <tr>
+                    <td>Match ${index + 1}</td>
+                    <td>${match.firstPlayer.name}</td>
+                    <td><img src="/fraction/${match.firstPlayer.army.fraction}.png" alt="${match.firstPlayer.army.fraction}" style="width: 32px; height: 32px;"></td>
+                    <td>${match.firstPlayer.army.hero}</td>
+                    <td>${match.firstPlayer.color}</td>
+                    <td>${match.firstPlayer.resetOrder}</td>
+                    <td>${match.secondPlayer.name}</td>
+                    <td><img src="/fraction/${match.secondPlayer.army.fraction}.png" alt="${match.secondPlayer.army.fraction}" style="width: 32px; height: 32px;"></td>
+                    <td>${match.secondPlayer.army.hero}</td>
+                    <td>${match.secondPlayer.color}</td>
+                    <td>${match.secondPlayer.resetOrder}</td>
+                </tr>`;
 
                     matchesTableBody.append(row);
                 }
