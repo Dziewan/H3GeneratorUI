@@ -132,7 +132,8 @@ input[name="tabs"]:checked + .tab-label {
 #tab1:checked ~ .tab-content[data-tab="1"],
 #tab2:checked ~ .tab-content[data-tab="2"],
 #tab3:checked ~ .tab-content[data-tab="3"],
-#tab4:checked ~ .tab-content[data-tab="4"] {
+#tab4:checked ~ .tab-content[data-tab="4"],
+#tab5:checked ~ .tab-content[data-tab="5"] {
     display: block;
 }
 

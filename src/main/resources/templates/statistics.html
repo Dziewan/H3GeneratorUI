@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="" class="tab-content" data-tab="5">
+    <section>
+        <h2>Statistics</h2>
+        <p></p>
+        <h2 th:text="'Michal vs Daniel'"></h2>
+        <h1>Sezony</h1>
+        <h1 th:text="${statistics.playerOneSetPoints() + ' : ' + statistics.playerTwoSetPoints()}"></h1>
+        <h1 th:text="'Aktualny sezon: ' + 5"></h1>
+        <h1>Mecze</h1>
+        <h1 th:text="${statistics.playerOneMatchPoints() + ' : ' + statistics.playerTwoMatchPoints()}"></h1>
+    </section>
+</div>
+</html>
