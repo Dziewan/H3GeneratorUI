@@ -2,9 +2,11 @@ package com.ddgroup.h3generatorui.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import factory.HeroesServiceFactory;
 import org.springframework.boot.web.client.RootUriTemplateHandler;
 import org.springframework.context.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import service.HeroesService;
 
 @Configuration
 public class AppConfig {
@@ -21,5 +23,10 @@ public class AppConfig {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setUriTemplateHandler(new RootUriTemplateHandler("http://34.116.140.204:8080"));
         return restTemplate;
+    }
+
+    @Bean
+    public HeroesService heroesService() {
+        return HeroesServiceFactory.newInstance();
     }
 }
