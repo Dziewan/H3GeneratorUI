@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<div th:fragment="championDetailsContent">
+    <section>
+        <h2>Champion details</h2>
+        <form th:action="@{/champion-details}" method="get">
+            <select th:name="selectedHero">
+                <option th:each="hero : ${heroes}"
+                        th:value="${hero}"
+                        th:text="${hero}"
+                        th:selected="${hero.equals(selectedHero)}">
+                </option>
+            </select>
+            <button th:type="submit">Get Details</button>
+        </form>
+        <div th:hidden="${selectedHero == null}">
+            <img th:src="@{'/heroes/' + ${selectedHero} + '.png'}">
+        </div>
+    </section>
+</div>
+</html>

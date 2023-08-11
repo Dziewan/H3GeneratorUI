@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<div th:fragment="reRollChampionsContent">
+    <section>
+        <h2>Re-roll Champions</h2>
+        <form th:action="@{/re-roll-champions}" method="get">
+            <div th:class="div-with-bottom-margin">
+                <label th:text="'Player one hero'"></label>
+                <select th:name="playerOneBannedHero">
+                    <option th:each="playerOneSelectedHero : ${heroes}"
+                            th:value="${playerOneSelectedHero}"
+                            th:text="${playerOneSelectedHero}"
+                            th:selected="${playerOneSelectedHero.equals(playerOneHero)}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label th:text="'Player two hero'"></label>
+                <select th:name="playerTwoBannedHero">
+                    <option th:each="playerTwoSelectedHero : ${heroes}"
+                            th:value="${playerTwoSelectedHero}"
+                            th:text="${playerTwoSelectedHero}"
+                            th:selected="${playerTwoSelectedHero.equals(playerTwoHero)}">
+                    </option>
+                </select>
+            </div>
+            <button th:type="submit">Roll</button>
+        </form>
+        <div th:hidden="${playerOneHero == null && playerTwoHero == null}">
+            <img th:src="@{'/heroes/' + ${playerOneHero} + '.png'}">
+            <img th:src="@{'/heroes/' + ${playerTwoHero} + '.png'}">
+        </div>
+    </section>
+</div>
+</html>

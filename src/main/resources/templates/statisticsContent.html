@@ -1,8 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="" class="tab-content" data-tab="5">
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<div th:fragment="statisticsContent">
     <section>
         <h2>Statistics</h2>
-        <p></p>
         <h2 th:text="'Michal vs Daniel'"></h2>
         <h1>Sezony</h1>
         <h1 th:text="${statistics.playerOneSetPoints() + ' : ' + statistics.playerTwoSetPoints()}"></h1>

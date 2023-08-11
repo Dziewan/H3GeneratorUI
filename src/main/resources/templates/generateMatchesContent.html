@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<div th:fragment="generateMatchesContent">
+    <section>
+        <table th:hidden="${hidden}">
+            <thead>
+            <tr>
+                <th>Match Number</th>
+                <th>Player</th>
+                <th>Fraction</th>
+                <th>Hero</th>
+                <th>Color</th>
+                <th>Reset Order</th>
+                <th>Player</th>
+                <th>Fraction</th>
+                <th>Hero</th>
+                <th>Color</th>
+                <th>Reset Order</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="match, iterStat : ${matches}">
+                <td th:text="${iterStat.index + 1}"></td>
+
+                <td th:text="${match.firstPlayer.name}"></td>
+                <td>
+                    <img th:src="@{'/fraction/' + ${match.firstPlayer.army.fraction} + '.png'}">
+                </td>
+                <td th:text="${match.firstPlayer.army.hero.name()}"></td>
+                <td>
+                    <img th:src="@{'/flags/' + ${match.firstPlayer.color} + '.png'}">
+                </td>
+                <td th:text="${match.firstPlayer.resetOrder}"></td>
+
+                <td th:text="${match.secondPlayer.name}"></td>
+                <td>
+                    <img th:src="@{'/fraction/' + ${match.secondPlayer.army.fraction} + '.png'}">
+                </td>
+                <td th:text="${match.secondPlayer.army.hero.name()}"></td>
+                <td>
+                    <img th:src="@{'/flags/' + ${match.secondPlayer.color} + '.png'}">
+                </td>
+                <td th:text="${match.secondPlayer.resetOrder}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/generate-matches}" method="get">
+            <input th:type="hidden" th:name="generateContent" th:value="true">
+            <button th:type="submit">Generate Matches</button>
+        </form>
+    </section>
+</div>
+</html>

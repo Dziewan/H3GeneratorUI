@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+
+<div th:fragment="tabs">
+    <input type="radio" id="tab1" name="tabs" checked>
+    <input type="radio" id="tab2" name="tabs">
+    <input type="radio" id="tab3" name="tabs">
+    <input type="radio" id="tab4" name="tabs">
+    <input type="radio" id="tab5" name="tabs">
+
+    <nav>
+        <label for="tab1" class="tab-label">
+            <a href="/generate-matches">Generate Matches</a>
+        </label>
+        <label for="tab2" class="tab-label">
+            <a href="/re-roll-champion">Re-roll Champion</a>
+        </label>
+        <label for="tab3" class="tab-label">
+            <a href="/re-roll-champions">Re-roll Champions</a>
+        </label>
+        <label for="tab4" class="tab-label">
+            <a href="/champion-details">Champion Details</a>
+        </label>
+        <label for="tab5" class="tab-label">
+            <a href="/statistics">Statistics</a>
+        </label>
+    </nav>
+</div>
+</html>

@@ -29,8 +29,27 @@ h1, h2 {
     margin: 0 0 10px 0;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+}
+
 section {
-    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+
+    flex-direction: column; /* Ustawia kierunek głównej osi na pionowy */
+    justify-content: flex-start; /* Dla wyśrodkowania pionowego */
+    align-items: center; /* Dla wyśrodkowania poziomego */
+    height: 100vh; /* Przykładowa wysokość */
+}
+
+section > * {
+    max-width: 50%;
+}
+
+.div-with-bottom-margin {
+    margin-bottom: 10px;
 }
 
 table {
@@ -44,7 +63,9 @@ table, th, td {
 
 th, td {
     padding: 5px;
-    text-align: left;
+    text-align: center;
+    vertical-align: middle;
+
 }
 
 button {
@@ -58,6 +79,7 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    height: 50px;
 }
 
 .details-container {
