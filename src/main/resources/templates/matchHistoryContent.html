@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<div th:fragment="matchHistoryContent">
+    <section>
+        <table th:hidden="${hidden}">
+            <thead>
+            <tr>
+                <th>Match Number</th>
+                <th>Match ongoing</th>
+                <th>Season</th>
+                <th>Match date</th>
+                <th>Player</th>
+                <th>Fraction</th>
+                <th>Hero</th>
+                <th>Color</th>
+                <th>Win</th>
+                <th>Details</th>
+                <th>Player</th>
+                <th>Fraction</th>
+                <th>Hero</th>
+                <th>Color</th>
+                <th>Win</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="match, iterStat : ${matchHistory}">
+                <td th:text="${iterStat.index + 1}"></td>
+                <td th:text="${match.onGoing}"></td>
+                <td th:text="${match.season}"></td>
+                <td th:text="${match.dateTime}"></td>
+                <td th:text="${match.playerOne.name}"></td>
+                <td>
+                    <img th:src="@{'/fraction/' + ${match.playerOne.fraction} + '.png'}">
+                </td>
+                <td th:text="${match.playerOne.hero}"></td>
+                <td>
+                    <img th:src="@{'/flags/' + ${match.playerOne.color} + '.png'}">
+                </td>
+                <td th:text="${match.playerOne.win}"></td>
+
+                <td th:text="${match.playerOne.details}"></td>
+                <td th:text="${match.playerTwo.name}"></td>
+                <td>
+                    <img th:src="@{'/fraction/' + ${match.playerTwo.fraction} + '.png'}">
+                </td>
+                <td th:text="${match.playerTwo.hero}"></td>
+                <td>
+                    <img th:src="@{'/flags/' + ${match.playerTwo.color} + '.png'}">
+                </td>
+                <td th:text="${match.playerTwo.win}"></td>
+
+                <td th:text="${match.playerTwo.details}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</html>

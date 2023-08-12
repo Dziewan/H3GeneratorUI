@@ -3,13 +3,16 @@ package com.ddgroup.h3generatorui.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import factory.HeroesServiceFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RootUriTemplateHandler;
 import org.springframework.context.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import service.HeroesService;
 
 @Configuration
+@RequiredArgsConstructor
 public class AppConfig {
+    private final HeroesApiConfig heroesApiConfig;
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -21,7 +24,7 @@ public class AppConfig {
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setUriTemplateHandler(new RootUriTemplateHandler("http://34.116.140.204:8080"));
+        restTemplate.setUriTemplateHandler(new RootUriTemplateHandler(heroesApiConfig.getBaseUrl()));
         return restTemplate;
     }
 
